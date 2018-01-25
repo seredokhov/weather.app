@@ -11,9 +11,6 @@ $(function() {
 
 	$.getJSON('../current.city.list.json', function (data) {
 
-
-
-
 		$('#country').on('change', function () {
 			var out = '';
 			var arr = [];
