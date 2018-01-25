@@ -9,7 +9,7 @@ navigator.geolocation.getCurrentPosition(function(position) {
 
 $(function() {
 
-	$.getJSON('current.city.list.json', function (data) {
+	$.getJSON('../current.city.list.json', function (data) {
 
 
 
@@ -25,7 +25,7 @@ $(function() {
 						id: data[key].id,
 					});
 
-					out += `<p value="${data[key].id}">${data[key].name}</p>`;
+					out += '<p value="' + data[key].id + '">' + data[key].name + '</p>';
 				}
 			}
 			$('#city').html(out);
