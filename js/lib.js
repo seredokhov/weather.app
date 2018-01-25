@@ -1,7 +1,7 @@
 
 // Инициализация + объявление констант
 function Lybrary() {
-	this.Url = 'http://api.openweathermap.org/data/2.5/';
+	this.Url = 'https://api.openweathermap.org/data/2.5/';
 	this.ImgUrl = 'https://openweathermap.org/img/w/';
 	this.Appid = 'fb7b90f94114b1c4a8c6ad811bb7e535';
 	this.defaultCityName = 'Moscow,ru';
