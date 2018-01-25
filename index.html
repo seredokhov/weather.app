@@ -5,8 +5,9 @@
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css">
 
-	<title>Document</title>
+	<title>Weather</title>
 </head>
 	<body>
 		<header class="navbar navbar-default">
@@ -18,10 +19,43 @@
 				</div>
 			</div>
 		</header>
-		<div class="container"></div>
+		<div class="container">
 
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="jumbotron">
+						<h1 id="cityName"></h1>
+						<div class="row">
+							<div class="col-xs-6" id="mainWeatherBlock">
+								<span></span>
+							</div>
+							<div class="col-xs-6">
+								<div id="mainDate"></div>
+							</div>
+						</div>
+						<p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<ul class="list-group">
+						<li class="list-group-item">Cras justo odio</li>
+						<li class="list-group-item">Dapibus ac facilisis in</li>
+						<li class="list-group-item">Morbi leo risus</li>
+						<li class="list-group-item">Porta ac consectetur ac</li>
+						<li class="list-group-item">Vestibulum at eros</li>
+					</ul>
+				</div>
+			</div>
+
+
+
+
+
+
+		</div>
+
+		<script src="js/jquery-1.11.2.min.js"></script>
+		<script src="js/lib.js"></script>
 		<script src="js/main.js"></script>
 	</body>
 </html>

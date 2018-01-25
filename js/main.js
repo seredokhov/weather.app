@@ -1,15 +1,80 @@
-// Получение местоположения пользователя
-/*
-navigator.geolocation.getCurrentPosition(function(position) {
-  console.log(position);
-});
-*/
-
-
+// Сценарий при загрузке страницы
+// ==============================
 
 $(function() {
 
-	$.getJSON('../current.city.list.json', function (data) {
+	var citiesArr = [];
+
+
+// Определение местополдожения пользователя
+	if (!!navigator.geolocation ) {		// Проверка на поддержку браузерами
+		navigator.geolocation.getCurrentPosition(function (position) {	// если поддерживается получаем координаты пользователя
+
+			var userLat = position.coords.latitude;	// широта
+			var userLlon = position.coords.longitude;	// долгота
+
+			Lib.getWeather({	// вызов и отображение виджета текущей погоды
+				'lat': userLat,
+				'lon': userLlon,
+				'appid': Lib.Appid
+			});
+		}, function () {
+			Lib.geoError();
+		});
+	} else {
+		Lib.geoError();
+	}
+
+	$.getJSON('current.city.list.json', function (data){
+		for (var key in data) {
+
+			citiesArr.push({
+				city: data[key].name,
+				id: data[key].id,
+				country: data[key].country,
+			});
+		}
+	});
+
+
+
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+$(function() {
+
+	$.getJSON('current.city.list.json', function (data) {
 
 		$('#country').on('change', function () {
 			var out = '';
@@ -55,6 +120,8 @@ $(function() {
 
 
 });
+
+*/
 /*
 
 	$.get(

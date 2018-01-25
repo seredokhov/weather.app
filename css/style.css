@@ -1,0 +1,15 @@
+div#mainImgBlock > img {
+	margin: 0 auto;
+
+}
+div#mainDate {
+	font-size: 20px;
+	font-style: italic;
+	padding: 10px 15px;
+}
+
+div#mainWeatherBlock span {
+	font-size: 30px;
+	font-weight: bold;
+	vertical-align: middle;
+}
