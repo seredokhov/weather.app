@@ -19,7 +19,7 @@ div#moreInfo {
 }
 div#moreInfo div {
 	margin: 0;
-	padding:5px 15px;
+	padding:0 15px;
 	overflow: hidden;
 	margin-bottom: 2px;
 }
@@ -28,4 +28,25 @@ div#moreInfo span.title,
 div#moreInfo span.value {
 	float: left;
 	width:50%;
+	padding: 5px 0;
+}
+div#moreInfo span.title {
+	border-right: 1px solid #ccc;
+}
+.change-countries-block {
+	overflow: hidden;
+	margin-bottom: 10px;
+}
+
+select#countries {
+	float: left;
+	width:70%;
+	border-bottom-right-radius: 0;
+	border-top-right-radius: 0;
+}
+button#country-select {
+	float: left;
+	width:30%;
+	border-bottom-left-radius: 0;
+	border-top-left-radius: 0;
 }

@@ -1,5 +1,3 @@
-// Сценарий при загрузке страницы
-// ==============================
 
 $(function() {
 
@@ -29,6 +27,14 @@ $(function() {
 	} else {
 		Lib.geoError();
 	}
+
+
+	
+
+
+
+
+
 
 	$.getJSON('current.city.list.json', function (data){
 		for (var key in data) {

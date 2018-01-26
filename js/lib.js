@@ -7,7 +7,7 @@ function Lybrary() {
 	this.defaultCityName = 'Moscow,ru';
 }
 var Lib = new Lybrary();
-
+// q=Minsk&lang=ru&appid=fb7b90f94114b1c4a8c6ad811bb7e535
 
 // Перевод UNIX Timestamp в дату
 

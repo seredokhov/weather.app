@@ -42,13 +42,30 @@
 					</div>
 				</div>
 				<div class="col-md-6">
-					<ul class="list-group">
-						<li class="list-group-item">Cras justo odio</li>
-						<li class="list-group-item">Dapibus ac facilisis in</li>
-						<li class="list-group-item">Morbi leo risus</li>
-						<li class="list-group-item">Porta ac consectetur ac</li>
-						<li class="list-group-item">Vestibulum at eros</li>
-					</ul>
+					<div class="change-countries-block">
+						<select id="countries" class="form-control">
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+							<option>5</option>
+						</select>
+						<button type="button" id="country-select" data-loading-text="Загрузка..." class="btn btn-primary" autocomplete="off">Загрузить города</button>
+
+					</div>
+
+
+
+
+					<div class="list-group">
+						<a href="#" class="list-group-item active">
+							Cras justo odio
+						</a>
+						<a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+						<a href="#" class="list-group-item">Morbi leo risus</a>
+						<a href="#" class="list-group-item">Porta ac consectetur ac</a>
+						<a href="#" class="list-group-item">Vestibulum at eros</a>
+					</div>
 				</div>
 			</div>
 
@@ -58,6 +75,20 @@
 
 
 		</div>
+
+
+		<script type="text/javascript">
+			window.onload = function () {
+				$("#user-city").text(ymaps.geolocation.city);
+				console.log(ymaps.geolocation);
+			}
+		</script>
+
+		<div id="user-city"></div>
+
+
+
+		<script src="http://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU" type="text/javascript"></script>
 
 		<script src="js/jquery-1.11.2.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
