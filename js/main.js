@@ -16,8 +16,13 @@ $(function() {
 			Lib.getWeather({	// вызов и отображение виджета текущей погоды
 				'lat': userLat,
 				'lon': userLlon,
+				'lang': 'ru',
 				'appid': Lib.Appid
 			});
+
+			var message = 'Ваше местоположение определено автоматически, ' + ' будет показана информация для вашего региона';
+			Lib.createAlert('info', message);
+
 		}, function () {
 			Lib.geoError();
 		});
@@ -35,6 +40,7 @@ $(function() {
 			});
 		}
 	});
+
 
 
 
