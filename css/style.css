@@ -177,7 +177,8 @@ a#showMap > i {
 
 /*  Блок управления  */
 .change-countries-block {
-	overflow: hidden;
+	display: flex;
+	flex-wrap: wrap;
 	margin-bottom: 15px;
 	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
 }
@@ -191,8 +192,8 @@ select#countries:focus{
 	color: #555;
 	font-size: 16px;
 	font-style: italic;
-	float: left;
-	width:70%;
+	flex-grow: 4;
+	flex-basis: 300px;
 }
 select#countries[disabled] {
 	background-color: #eeeeee;
@@ -200,8 +201,7 @@ select#countries[disabled] {
 	opacity:0.3;
 }
 button#country-btn {
-	float: left;
-	width:30%;
+	flex-grow: 1;
 	padding:9px 10px;
 	height:40px;
 	font-size: 16px;
@@ -539,13 +539,11 @@ footer {
 	}
 	select#countries,
 	select#countries:focus{
-		width: 55%;
 		white-space: nowrap;
 		overflow: hidden;
 
 	}
 	button#country-btn {
-		width: 45%;
 		font-size: 15px;
 	}
 }

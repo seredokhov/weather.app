@@ -1,7 +1,6 @@
 
 (function() {
 
-
 // Определение местоположения пользователя + запрос на отображение погоды
 	window.onload = function () {
 
@@ -22,22 +21,22 @@
 			});
 			// Генерируем сообщение
 			message = 'Ваше местоположение определено, будет показана информация для вашего региона';
-			Lib.createAlert('info', message, getById('main-content'), true);
+			Lib.createAlert('info', message, Lib.getById('main-content'), true);
 		} catch (err) {
 			// Если не удалось определить местоположение показываем погоду для региона по умолчанию
 			Lib.getWeather({
-				'q': Lib.defaultCityName,
+				'q':  'Minsk',
 				'lang': 'ru'
 			});
 			message = 'Не удалось определить ваше местоположение, будет показана информация для региона по умолчанию';
-			Lib.createAlert('warning', message, getById('main-content'), true);
+			Lib.createAlert('warning', message, Lib.getById('main-content'), true);
 		}
 	};
 
 	var countryID;
-	var select = document.getElementById('countries');
-	var showCitiesBtn = document.getElementById('country-btn');
-	var cities = document.getElementById('cities');
+	var select = Lib.getById('countries');
+	var showCitiesBtn = Lib.getById('country-btn');
+	var cities = Lib.getById('cities');
 
 // Загрузка JSON и вызов колбека
 	var request = new XMLHttpRequest();	// Создаем объект запроса
@@ -63,7 +62,7 @@
 					showCitiesBtn.innerHTML = '<i class="fa fa-search"></i> Показать города';
 				} else {
 					showCitiesBtn.setAttribute('disabled', 'disabled');
-					showCitiesBtn.innerHTML = '<i class="fa fa-search"></i> Найдено: ' + Lib.countCities;
+					showCitiesBtn.innerHTML = '<i class="fa fa-search"></i> Найдено: ' + Lib.countCities();
 				}
 			});
 
@@ -81,9 +80,9 @@
 			});
 
 			// Удаляем сообщение о загрузке
-			getById('load-alert').parentNode.removeChild(getById('load-alert'));
+			Lib.getById('load-alert').parentNode.removeChild(Lib.getById('load-alert'));
 			// Генерируем новое сообщение
-			Lib.createAlert('info', '<i class="fa fa-check"></i> Список городов загружен.', getById('cities'));
+			Lib.createAlert('info', '<i class="fa fa-check"></i> Список городов загружен.', Lib.getById('cities'));
 
 		} else {
 			// Если сервер не ответил или ответ не понравился
@@ -92,8 +91,6 @@
 	};
 	// И отправляем запрос
 	request.send();
-
-
 
 })();
 
