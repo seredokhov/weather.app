@@ -1,57 +1,101 @@
 
-$(function() {
-
-	var citiesArr = [];
+(function() {
 
 
-// Определение местополдожения пользователя
-	if (!!navigator.geolocation ) {		// Проверка на поддержку браузерами
-		navigator.geolocation.getCurrentPosition(function (position) {	// если поддерживается получаем координаты пользователя
+// Определение местоположения пользователя + запрос на отображение погоды
+	window.onload = function () {
 
-			var userLat = position.coords.latitude;	// широта
-			var userLlon = position.coords.longitude;	// долгота
+		try {
+			var userLat = ymaps.geolocation.latitude;	// широта
+			var userLlon = ymaps.geolocation.longitude;	// долгота
+			var message;
 
-			Lib.getWeather({	// вызов и отображение виджета текущей погоды
+			// Генерируем исключение
+			if ( !userLat  || !userLlon  ) {
+				throw new Error('Не удалось найти местоположение');
+			}
+			// Показываем погоду для текущего местоположения пользователя
+			Lib.getWeather({
 				'lat': userLat,
 				'lon': userLlon,
-				'lang': 'ru',
-				'appid': Lib.Appid
+				'lang': 'ru'
 			});
-
-			var message = 'Ваше местоположение определено автоматически, ' + ' будет показана информация для вашего региона';
-			Lib.createAlert('info', message);
-
-		}, function () {
-			Lib.geoError();
-		});
-	} else {
-		Lib.geoError();
-	}
-
-
-	
-
-
-
-
-
-
-	$.getJSON('current.city.list.json', function (data){
-		for (var key in data) {
-
-			citiesArr.push({
-				city: data[key].name,
-				id: data[key].id,
-				country: data[key].country,
+			// Генерируем сообщение
+			message = 'Ваше местоположение определено, будет показана информация для вашего региона';
+			Lib.createAlert('info', message, getById('main-content'), true);
+		} catch (err) {
+			// Если не удалось определить местоположение показываем погоду для региона по умолчанию
+			Lib.getWeather({
+				'q': Lib.defaultCityName,
+				'lang': 'ru'
 			});
+			message = 'Не удалось определить ваше местоположение, будет показана информация для региона по умолчанию';
+			Lib.createAlert('warning', message, getById('main-content'), true);
 		}
-	});
+	};
+
+	var countryID;
+	var select = document.getElementById('countries');
+	var showCitiesBtn = document.getElementById('country-btn');
+	var cities = document.getElementById('cities');
+
+// Загрузка JSON и вызов колбека
+	var request = new XMLHttpRequest();	// Создаем объект запроса
+	request.open('GET', 'current.city.list.json', true);	// формируем запрос
+
+	// Инициализируем функцию калбэк
+	request.onload = function() {
+		// Проверяем ответ сервера
+		if (request.status >= 200 && request.status < 400) {
+			// Парсим строку JSON
+			var data = JSON.parse(request.responseText);
+
+			// Делаем селект доступным после полной загрузки JSON
+			select.removeAttribute('disabled');
+
+			// Активация кнопки "показать города" при выборе страны в селекте
+			select.addEventListener('change', function() {
+				if ( this.value !== null && this.value !== countryID ) {
+
+					// Если в выбраном селекте задан атрибут value
+					// и выбранная страна не является той, чьи города на данный момент загружены
+					showCitiesBtn.removeAttribute('disabled');
+					showCitiesBtn.innerHTML = '<i class="fa fa-search"></i> Показать города';
+				} else {
+					showCitiesBtn.setAttribute('disabled', 'disabled');
+					showCitiesBtn.innerHTML = '<i class="fa fa-search"></i> Найдено: ' + Lib.countCities;
+				}
+			});
+
+			// Событие 'показать города'
+			showCitiesBtn.addEventListener('click', function() {
+				// Записываем значение выбранного селекта для дальнейшей проверке при выборе стран
+				countryID = select.value;
+
+				// Деактивируем кнопку и на время загрузки заменяем текст в ней
+				showCitiesBtn.setAttribute('disabled', 'disabled');
+				showCitiesBtn.innerHTML = 'Загрузка...';
+
+				// Передаем объекты в функцию для получения списка городов
+				Lib.getCityArray([data, showCitiesBtn]);
+			});
+
+			// Удаляем сообщение о загрузке
+			getById('load-alert').parentNode.removeChild(getById('load-alert'));
+			// Генерируем новое сообщение
+			Lib.createAlert('info', '<i class="fa fa-check"></i> Список городов загружен.', getById('cities'));
+
+		} else {
+			// Если сервер не ответил или ответ не понравился
+			console.log('Не удалось загрузить JSON, сервер не отвечает');
+		}
+	};
+	// И отправляем запрос
+	request.send();
 
 
 
-
-
-});
+})();
 
 
 
