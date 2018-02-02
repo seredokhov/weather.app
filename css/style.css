@@ -147,6 +147,7 @@ h1.current-title {
 	border-radius: 2px;
 	cursor: pointer;
 	transition: all .1s linear;
+	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
 }
 .button:hover {
 	background: #1e88e5;
@@ -160,6 +161,7 @@ h1.current-title {
 .button[disabled] {
 	opacity: 0.6;
 	cursor: not-allowed;
+	box-shadow: none;
 }
 
 
@@ -201,11 +203,13 @@ select#countries[disabled] {
 	opacity:0.3;
 }
 button#country-btn {
-	flex-grow: 1;
+	flex-grow: 0;
+	flex-basis: 200px;
 	padding:9px 10px;
 	height:40px;
 	font-size: 16px;
 	border-radius: 0;
+	box-shadow: none;
 }
 
 input#search {
@@ -545,6 +549,7 @@ footer {
 	}
 	button#country-btn {
 		font-size: 15px;
+		flex-grow: 1;
 	}
 }
 
