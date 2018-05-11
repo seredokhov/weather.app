@@ -34,7 +34,7 @@
 				</div>
 			</div>
 			<div class="controls-block">
-				<div class="change-countries-block">
+				<form method="POST" class="change-countries-block">
 					<select id="countries" disabled>
 						<option disabled selected>Выберите страну</option>
 						<option value="AU">Австралия</option>
@@ -146,7 +146,7 @@
 						<option value="JP">Япония</option>
 					</select>
 					<button type="button" id="country-btn" class="button" disabled><i class="fa fa-search"></i> Показать города</button>
-				</div>
+				</form>
 				<div id="searchCity"></div>
 				<div class="cities-block" id="cities">
 					<div id="load-alert" class="alert-warning"><i class="fa fa-refresh fa-spin"></i> Идет загрузка городов...</div>
@@ -167,9 +167,7 @@
 		</section>
 
 		<footer>
-			<div class="container-fluid">
-				Футер
-			</div>
+			<div class="container-fluid"></div>
 		</footer>
 	</div>
 		<script src="http://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU" type="text/javascript"></script>

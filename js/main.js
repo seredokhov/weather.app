@@ -1,13 +1,20 @@
 
 (function() {
 
+	var countryID,
+		select = Lib.getById('countries'),
+		showCitiesBtn = Lib.getById('country-btn'),
+		cities = Lib.getById('cities'),
+		request;
+
+
 // Определение местоположения пользователя + запрос на отображение погоды
 	window.onload = function () {
 
 		try {
-			var userLat = ymaps.geolocation.latitude;	// широта
-			var userLlon = ymaps.geolocation.longitude;	// долгота
-			var message;
+			var userLat = ymaps.geolocation.latitude,	// широта
+					userLlon = ymaps.geolocation.longitude,	// долгота
+					message;
 
 			// Генерируем исключение
 			if ( !userLat  || !userLlon  ) {
@@ -33,21 +40,22 @@
 		}
 	};
 
-	var countryID;
-	var select = Lib.getById('countries');
-	var showCitiesBtn = Lib.getById('country-btn');
-	var cities = Lib.getById('cities');
+
 
 // Загрузка JSON и вызов колбека
-	var request = new XMLHttpRequest();	// Создаем объект запроса
+	request = new XMLHttpRequest();	// Создаем объект запроса
 	request.open('GET', 'current.city.list.json', true);	// формируем запрос
 
 	// Инициализируем функцию калбэк
+
 	request.onload = function() {
+
+		var data;
+
 		// Проверяем ответ сервера
 		if (request.status >= 200 && request.status < 400) {
 			// Парсим строку JSON
-			var data = JSON.parse(request.responseText);
+			data = JSON.parse(request.responseText);
 
 			// Делаем селект доступным после полной загрузки JSON
 			select.removeAttribute('disabled');
@@ -73,7 +81,7 @@
 
 				// Деактивируем кнопку и на время загрузки заменяем текст в ней
 				showCitiesBtn.setAttribute('disabled', 'disabled');
-				showCitiesBtn.innerHTML = 'Загрузка...';
+				//showCitiesBtn.innerHTML = 'Загрузка...';
 
 				// Передаем объекты в функцию для получения списка городов
 				Lib.getCityArray([data, showCitiesBtn]);
@@ -93,98 +101,3 @@
 	request.send();
 
 })();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-
-$(function() {
-
-	$.getJSON('current.city.list.json', function (data) {
-
-		$('#country').on('change', function () {
-			var out = '';
-			var arr = [];
-			for (var key in data) {
-				if (data[key].country == $('#country option:selected').val()) {
-
-					arr.push({
-						city: data[key].name,
-						id: data[key].id,
-					});
-
-					out += '<p value="' + data[key].id + '">' + data[key].name + '</p>';
-				}
-			}
-			$('#city').html(out);
-			$('#city p').on('click', function(){
-				$.get(
-					"http://api.openweathermap.org/data/2.5/weather",
-					{
-						"id": $(this).attr('value'),
-						"lang": "ru",
-						"appid": "fb7b90f94114b1c4a8c6ad811bb7e535"
-					},
-					function(data){
-						console.log(data);
-						var out = "";
-						out += 'Населенный пункт: <b>' + data.name + '</b></br>';
-						out += 'Координаты: <b>' + 'Широта ' + data.coord.lat + ' Долгота ' + data.coord.lon + '</b></br>';
-						out += 'Погода: <b>' + data.weather[0].description + '</b></br>';
-						out += 'Облачность: <b>' + data.clouds.all + '%</b></br>';
-						if( data.visibility ) {
-							out += 'Видимость: <b>' + data.visibility + 'м</b></br>';
-						}
-						out += 'Температура: <b>' + Math.round(data.main.temp - 273) + 'C</b></br>';
-						$('#current-weather').html(out);
-					}
-				);
-			})
-
-		})
-	});
-
-
-});
-
-*/
-/*
-
-	$.get(
-		"http://api.openweathermap.org/data/2.5/forecast",
-		{
-			"q": "Minsk",
-			"appid": "fb7b90f94114b1c4a8c6ad811bb7e535"
-		},
-		function(data){
-			console.log(data);
-		}
-	);
-*/
