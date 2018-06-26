@@ -1,41 +1,50 @@
 <!doctype html>
-<html lang="en">
+<html lang="ru">
 <head>
+	<title>Weather</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	<link rel="stylesheet" href="css/font-awesome.min.css">
-	<link rel="stylesheet" href="css/style.css">
-
-	<title>Weather</title>
+	<link rel="stylesheet" href="../public/css/font-awesome.min.css">
+	<link rel="stylesheet" href="../public/css/style.css">
 </head>
-<body>
-
+<body>	
 	<div class="wrapper">
 		<header>
 			<div class="container">
-				<a class="logo" href="#"><i class="fa fa-sun-o"></i> Weather</a>
+				<div class="logo"><i class="fa fa-snowflake-o"></i>Погода</div>
+				<ul class="links_ul">
+					<li><a href="/cities"><span id="count" class="empty"></span>Закладки</a></li>
+				</ul>
+				<div class="welcome">
+					<a href="/logout"><i class="fa fa-sign-out"></i>Выйти</a>
+					<span><i class="fa fa-user"></i><?php echo $_SESSION['user']['username']; ?></span>				
+				</div>
 			</div>
 		</header>
-		<h1 class="current-title">Прогноз погоды на текущее время.</h1>
+		<h1 class="current-title">Прогноз погоды на текущее время</h1>
 		<section class="flex-row" id="main-content">
 			<div class="current-weather">
 				<div class="widget-card" id="widget">
+					<div class="overlay" id="load"><i class="fa fa-circle-o-notch fa-spin"></i></div>
 					<div class="main-panel">
 						<h1 id="cityName"></h1>
 						<div id="mainDate"></div>
 						<div id="mainWeatherBlock"></div>
+						<a href="#" id="city_add" class="fa fa-database">
+							<i class="fa fa-plus" aria-hidden="true"></i>
+						</a>
 					</div>
 					<div class="panel-block" id="moreInfo"></div>
 
 					<div>
-						<button class="button" type="button" id="getMore"><i class="fa fa-cloud"></i> Подробный прогноз</button>
+						<button class="button" type="button" id="getMore"><i class="fa fa-calendar"></i> Подробный прогноз</button>
 						<a href="#" id="showMap"><i class="fa fa-globe"></i> Показать на карте?</a>
 					</div>
 				</div>
 			</div>
 			<div class="controls-block">
 				<form method="POST" class="change-countries-block">
-					<select id="countries" disabled>
+					<select id="countries">
 						<option disabled selected>Выберите страну</option>
 						<option value="AU">Австралия</option>
 						<option value="AT">Австрия</option>
@@ -148,17 +157,12 @@
 					<button type="button" id="country-btn" class="button" disabled><i class="fa fa-search"></i> Показать города</button>
 				</form>
 				<div id="searchCity"></div>
-				<div class="cities-block" id="cities">
-					<div id="load-alert" class="alert-warning"><i class="fa fa-refresh fa-spin"></i> Идет загрузка городов...</div>
+				<div class="cities-list" id="cities">
+					<div id="load-alert" class="alert-info"><i class="fa fa-globe"></i>Выберите страну из списка</div>
 				</div>
 
 			</div>
 		</section>
-
-
-
-
-
 
 		<section class="forecast" id="forecast">
 			<h2></h2>
@@ -169,9 +173,11 @@
 		<footer>
 			<div class="container-fluid"></div>
 		</footer>
+		<div id="alerts"></div>
 	</div>
-		<script src="http://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU" type="text/javascript"></script>
-		<script src="js/lib.js"></script>
-		<script src="js/main.js"></script>
+	
+		<script src="http://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru_RU" type="text/javascript"></script>
+		<script src="../public/js/lib.js"></script>
+		<script src="../public/js/main.js"></script>
 </body>
 </html>
